@@ -68,6 +68,61 @@ alert("Mauvais identifiants");
 }
 
 
+
+async function loadParticipants(){
+
+
+const res = await fetch(API+"/participants",{
+
+
+headers:{
+"Authorization":
+"Bearer "+token
+}
+
+
+});
+
+
+const data = await res.json();
+
+
+
+const table =
+document.getElementById("participants");
+
+
+
+table.innerHTML="";
+
+
+
+data.forEach(p=>{
+
+
+table.innerHTML += `
+
+<tr>
+
+<td>${p.email}</td>
+
+<td>${p.fingerprint}</td>
+
+<td>🎁 ${p.prize}</td>
+
+<td>${new Date(p.created_at).toLocaleString()}</td>
+
+</tr>
+
+`;
+
+
+});
+
+
+}
+
+
 async function loadPrizes(){
 
     const res = await fetch(API + "/prizes");

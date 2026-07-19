@@ -3,6 +3,28 @@ const API =
 
 
 
+function getFingerprint(){
+
+    let id = localStorage.getItem("device_id");
+
+
+    if(!id){
+
+        id = crypto.randomUUID();
+
+        localStorage.setItem(
+            "device_id",
+            id
+        );
+
+    }
+
+
+    return id;
+
+}
+
+
 async function play(){
 
 
@@ -19,46 +41,57 @@ return;
 }
 
 
+const fingerprint =
+getFingerprint();
 
-const result =
-document.getElementById("result");
-
-
-result.innerHTML =
-"🎰 Tirage en cours...";
-
-
-
-try {
 
 
 const response =
-await fetch(API + "/play");
+await fetch(API+"/play",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+
+body:JSON.stringify({
+
+email:email,
+
+fingerprint:fingerprint
+
+})
+
+
+});
 
 
 
-const gain =
+const data =
 await response.json();
 
 
 
-result.innerHTML =
+if(!data.success){
+
+document.getElementById("result")
+.innerHTML =
+"❌ " + data.message;
+
+return;
+
+}
+
+
+
+document.getElementById("result")
+.innerHTML =
 "🎉 Tu as gagné : "
 +
-gain.name;
+data.prize;
 
-
-
-}
-
-catch(error){
-
-console.log(error);
-
-result.innerHTML =
-"Erreur serveur";
-
-}
 
 
 }
