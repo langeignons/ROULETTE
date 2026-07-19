@@ -1,5 +1,62 @@
 const API = "https://roulette.angelinhart.workers.dev";
 
+let token = localStorage.getItem("token");
+
+
+async function login(){
+
+
+const res =
+await fetch(API+"/login",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+
+username:
+document.getElementById("username").value,
+
+password:
+document.getElementById("password").value
+
+})
+
+});
+
+
+const data =
+await res.json();
+
+
+
+if(data.success){
+
+localStorage.setItem(
+"token",
+data.token
+);
+
+
+alert("Connecté");
+
+
+location.reload();
+
+
+}
+
+else{
+
+alert("Erreur login");
+
+}
+
+}
+
 
 async function loadPrizes(){
 
@@ -75,19 +132,22 @@ async function addPrize(){
 
 
 
-    await fetch(API + "/add", {
+await fetch(API + "/add", {
 
-        method:"POST",
+    method:"POST",
 
-        headers:{
-            "Content-Type":"application/json"
-        },
+    headers:{
+        "Content-Type":"application/json",
+
+        "Authorization":
+        "Bearer " + token
+    },
 
 
-        body:
-        JSON.stringify(data)
+    body:
+    JSON.stringify(data)
 
-    });
+});
 
 
     alert("Loot ajouté");
