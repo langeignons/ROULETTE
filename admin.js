@@ -14,7 +14,7 @@ headers:{
 "Content-Type":"application/json"
 },
 
-body:JSON.stringify({
+body: JSON.stringify({
 
 username:
 document.getElementById("username").value,
