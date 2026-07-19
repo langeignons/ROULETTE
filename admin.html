@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+<meta charset="UTF-8">
+<title>Admin Roulette</title>
+
+<style>
+
+body {
+    font-family: Arial;
+    max-width: 800px;
+    margin: 40px auto;
+}
+
+input, button {
+    padding: 10px;
+    margin: 5px;
+}
+
+.card {
+    border:1px solid #ccc;
+    padding:15px;
+    margin:10px 0;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<h1>🎰 Administration Roulette</h1>
+
+
+<h2>Ajouter un loot</h2>
+
+<input id="name" placeholder="Nom du lot">
+
+<input id="probability" placeholder="Chance (ex: 0.01)">
+
+<input id="stock" placeholder="Stock">
+
+
+<button onclick="addPrize()">
+Ajouter
+</button>
+
+
+
+<h2>Lots actuels</h2>
+
+<div id="prizes"></div>
+
+
+
+<h2>Test roulette</h2>
+
+<button onclick="play()">
+🎰 Lancer
+</button>
+
+
+<h3 id="result"></h3>
+
+
+
+<script src="admin.js"></script>
+
+
+</body>
+
+</html>
