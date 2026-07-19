@@ -6,8 +6,7 @@ let token = localStorage.getItem("token");
 async function login(){
 
 
-const res =
-await fetch(API+"/login",{
+const res = await fetch(API+"/login", {
 
 method:"POST",
 
@@ -28,12 +27,12 @@ document.getElementById("password").value
 });
 
 
-const data =
-await res.json();
+const data = await res.json();
 
 
 
 if(data.success){
+
 
 localStorage.setItem(
 "token",
@@ -41,19 +40,30 @@ data.token
 );
 
 
-alert("Connecté");
+
+document.getElementById("login").style.display="none";
 
 
-location.reload();
+document.getElementById("adminPanel").style.display="block";
+
+
+token = data.token;
+
+
+loadPrizes();
+
+
+alert("Connexion réussie");
 
 
 }
 
 else{
 
-alert("Erreur login");
+alert("Mauvais identifiants");
 
 }
+
 
 }
 
