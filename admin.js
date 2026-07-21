@@ -106,11 +106,17 @@ table.innerHTML += `
 
 <td>${p.email}</td>
 
-<td>${p.fingerprint}</td>
+<td>${p.fingerprint.substring(0,8)}...</td>
 
-<td>🎁 ${p.prize}</td>
+<td>${p.prize}</td>
 
 <td>${new Date(p.created_at).toLocaleString()}</td>
+
+<td>
+<button onclick="deleteParticipant(${p.id})">
+❌ Annuler
+</button>
+</td>
 
 </tr>
 
@@ -195,6 +201,12 @@ async function addPrize(){
 
     };
 
+    const data = {
+    name: document.getElementById("name").value,
+    probability: Number(document.getElementById("probability").value),
+    stock: Number(document.getElementById("stock").value)
+    };
+
 
 
 await fetch(API + "/add", {
@@ -258,6 +270,56 @@ async function play(){
     .innerHTML =
     "🎉 Gain : " + gain.name;
 
+
+}
+
+
+async function deleteParticipant(id){
+
+    if(!confirm("Annuler cette participation ?")){
+        return;
+    }
+
+    await fetch(API+"/deleteParticipant",{
+
+        method:"POST",
+
+        headers:{
+            "Content-Type":"application/json",
+            "Authorization":"Bearer "+token
+        },
+
+        body:JSON.stringify({
+            id:id
+        })
+
+    });
+
+    loadParticipants();
+
+}
+
+
+async function testRoulette(){
+
+    const res = await fetch(API+"/play",{
+
+        method:"POST",
+
+        headers:{
+            "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify({
+            email:"test-admin-"+Date.now()+"@test.fr",
+            fingerprint:crypto.randomUUID()
+        })
+
+    });
+
+    const data = await res.json();
+
+    alert(JSON.stringify(data));
 
 }
 
