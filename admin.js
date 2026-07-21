@@ -201,7 +201,7 @@ async function addPrize(){
 
     };
 
-    const data = {
+    const data2 = {
     name: document.getElementById("name").value,
     probability: Number(document.getElementById("probability").value),
     stock: Number(document.getElementById("stock").value)
