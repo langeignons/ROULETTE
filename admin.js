@@ -71,20 +71,22 @@ alert("Mauvais identifiants");
 
 async function loadParticipants(){
 
+    const res = await fetch(API+"/participants", {
 
-const res = await fetch(API+"/participants",{
+        method:"GET",
+
+        headers:{
+            "Authorization":"Bearer "+token
+        }
+
+    });
 
 
-headers:{
-"Authorization":
-"Bearer "+token
+    const data = await res.json();
+
+    console.log(data);
+
 }
-
-
-});
-
-
-const data = await res.json();
 
 
 
@@ -126,7 +128,7 @@ table.innerHTML += `
 });
 
 
-}
+
 
 
 async function loadPrizes(){
