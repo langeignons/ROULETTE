@@ -3,7 +3,7 @@ const API = "https://roulette.angelinhart.workers.dev";
 let token = localStorage.getItem("token");
 
 
-async function login(){
+async function adminLogin(){
 
 
 const res = await fetch(API+"/login", {
