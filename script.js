@@ -2,96 +2,89 @@ const API =
 "https://roulette.angelinhart.workers.dev";
 
 
-
 function getFingerprint(){
 
     let id = localStorage.getItem("device_id");
 
-
     if(!id){
-
         id = crypto.randomUUID();
-
-        localStorage.setItem(
-            "device_id",
-            id
-        );
-
+        localStorage.setItem("device_id", id);
     }
-
 
     return id;
 
 }
 
 
+function showTicket(message, isWin){
+
+    const wrap = document.getElementById("result-wrap");
+
+    wrap.innerHTML = `
+        <div class="ticket ${isWin ? "win" : "lose"}">
+            ${message}
+        </div>
+    `;
+
+}
+
+
 async function play(){
 
+    const emailInput = document.getElementById("email");
+    const email = emailInput.value;
 
-const email =
-document.getElementById("email").value;
+    if(!email){
+        alert("Entre ton email");
+        return;
+    }
 
+    const fingerprint = getFingerprint();
 
-if(!email){
+    const playBtn = document.getElementById("playBtn");
+    const wheel = document.getElementById("wheel");
 
-alert("Entre ton email");
+    playBtn.disabled = true;
+    wheel.classList.add("spinning");
 
-return;
+    let data;
 
-}
+    try{
 
+        const response = await fetch(API + "/play", {
 
-const fingerprint =
-getFingerprint();
+            method: "POST",
 
+            headers: {
+                "Content-Type": "application/json"
+            },
 
+            body: JSON.stringify({
+                email: email,
+                fingerprint: fingerprint
+            })
 
-const response =
-await fetch(API+"/play",{
+        });
 
-method:"POST",
+        data = await response.json();
 
-headers:{
-"Content-Type":"application/json"
-},
+    } catch(err){
 
+        wheel.classList.remove("spinning");
+        playBtn.disabled = false;
+        showTicket("❌ Connexion impossible, réessaie.", false);
+        return;
 
-body:JSON.stringify({
+    }
 
-email:email,
+    wheel.classList.remove("spinning");
+    playBtn.disabled = false;
 
-fingerprint:fingerprint
+    if(!data.success){
+        showTicket("❌ " + data.message, false);
+        return;
+    }
 
-})
-
-
-});
-
-
-
-const data =
-await response.json();
-
-
-
-if(!data.success){
-
-document.getElementById("result")
-.innerHTML =
-"❌ " + data.message;
-
-return;
-
-}
-
-
-
-document.getElementById("result")
-.innerHTML =
-"🎉 Tu as gagné : "
-+
-data.prize;
-
-
+    showTicket("🎉 Tu as gagné : <strong>" + data.prize + "</strong>", true);
 
 }

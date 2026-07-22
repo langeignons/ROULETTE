@@ -2,55 +2,44 @@
 <html lang="fr">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Roulette</title>
-
 <link rel="stylesheet" href="style.css">
-
 </head>
-
 
 <body>
 
-
 <div class="container">
 
+  <div class="marquee">
 
-<h1>🎰 Roulette</h1>
+    <span class="eyebrow">Un lot vous attend</span>
+    <h1>🎰 Roulette</h1>
+    <p class="tagline">Tentez votre chance et gagnez un lot !</p>
 
-<p>
-Tentez votre chance et gagnez un lot !
-</p>
+    <input
+      id="email"
+      type="email"
+      placeholder="ton-email@exemple.fr"
+      autocomplete="email"
+    >
 
+    <button class="btn-play" onclick="play()" id="playBtn">
+      🎰 Lancer
+    </button>
 
-<input 
-id="email"
-type="email"
-placeholder="Votre email"
->
+    <div id="wheel">🎁</div>
 
-<button onclick="play()">
-🎰 Lancer
-</button>
+    <div id="result-wrap">
+      <h2 id="result" style="display:none;"></h2>
+    </div>
 
-
-<div id="wheel">
-🎁
-</div>
-
-
-<h2 id="result"></h2>
-
+  </div>
 
 </div>
-
-
 
 <script src="script.js"></script>
-
 </body>
 
 </html>

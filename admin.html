@@ -2,114 +2,76 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Roulette</title>
-
-<style>
-
-body {
-    font-family: Arial;
-    max-width: 800px;
-    margin: 40px auto;
-}
-
-input, button {
-    padding: 10px;
-    margin: 5px;
-}
-
-.card {
-    border:1px solid #ccc;
-    padding:15px;
-    margin:10px 0;
-}
-
-</style>
-
+<link rel="stylesheet" href="admin.css">
 </head>
-
 
 <body>
 
 <div id="login">
+  <h2>Accès Staff</h2>
 
-<input id="username" placeholder="Utilisateur">
+  <input id="username" placeholder="Utilisateur" autocomplete="username">
+  <input id="password" placeholder="Mot de passe" type="password" autocomplete="current-password">
 
-<input id="password" placeholder="Mot de passe" type="password">
-
-<button onclick="adminLogin()">
-Connexion
-</button>
-
+  <button class="btn-gold" onclick="adminLogin()" style="width:100%; margin-top:10px;">
+    Connexion
+  </button>
 </div>
 
 <div id="adminPanel" style="display:none;">
 
-<h1>🎰 Administration Roulette</h1>
+  <div class="admin-header">
+    <h1>🎰 Administration Roulette</h1>
+    <span class="badge">Backstage</span>
+  </div>
 
+  <section class="panel">
+    <h2>Ajouter un loot</h2>
 
-<h2>Ajouter un loot</h2>
+    <div class="add-form">
+      <input id="name" placeholder="Nom du lot">
+      <input id="probability" placeholder="Chance (ex: 0.01)">
+      <input id="stock" type="number" value="1" min="0" placeholder="Stock">
+      <button class="btn-gold" onclick="addPrize()">Ajouter</button>
+    </div>
+  </section>
 
-<input id="name" placeholder="Nom du lot">
+  <section class="panel">
+    <h2>Lots actuels</h2>
+    <div id="prizes"></div>
+  </section>
 
-<input id="probability" placeholder="Chance (ex: 0.01)">
+  <section class="panel">
+    <h2>👥 Participants</h2>
 
-<input id="stock" type="number" value="1" min="0" placeholder="Stock">
+    <button class="btn-ghost" onclick="loadParticipants()">
+      Voir les participants
+    </button>
 
+    <table border="0">
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Appareil</th>
+          <th>Gain</th>
+          <th>Date</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="participants"></tbody>
+    </table>
+  </section>
 
-<button onclick="addPrize()">
-Ajouter
-</button>
+  <section class="panel">
+    <h2>Test roulette</h2>
+    <button class="btn-gold" onclick="testRoulette()">🎰 Lancer</button>
+  </section>
 
-
-
-<h2>Lots actuels</h2>
-
-<div id="prizes"></div>
-
-
-<h2>👥 Participants</h2>
-
-<button onclick="loadParticipants()">
-Voir les participants
-</button>
-
-
-<table border="1">
-
-<thead>
-
-<tr>
-<th>Email</th>
-<th>Appareil</th>
-<th>Gain</th>
-<th>Date</th>
-<th>Action</th>
-</tr>
-
-</thead>
-
-
-<tbody id="participants">
-
-</tbody>
-
-
-</table>
-
-
-
-<h2>Test roulette</h2>
-
-<button onclick="testRoulette()">
-🎰 Lancer
-</button>
+  <h3 id="result"></h3>
 
 </div>
-
-
-<h3 id="result"></h3>
-
-
 
 <script src="admin.js"></script>
 </body>

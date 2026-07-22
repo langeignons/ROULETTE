@@ -1,0 +1,265 @@
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Space+Mono:wght@400;700&display=swap');
+
+:root{
+  --navy: #1B1F3B;
+  --navy-deep: #12142A;
+  --panel: #232849;
+  --gold: #D4A537;
+  --gold-bright: #F2C94C;
+  --cream: #F3E9D2;
+  --ink: #2A1712;
+  --win: #3E8C63;
+  --lose: #C0392B;
+  --border: #3A4066;
+
+  --font-display: 'Alfa Slab One', system-ui, sans-serif;
+  --font-body: 'Fraunces', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+}
+
+*{ box-sizing: border-box; }
+
+body{
+  margin:0;
+  min-height:100vh;
+  font-family: var(--font-body);
+  color: var(--cream);
+  background:
+    radial-gradient(circle at 15% 0%, #262c52, transparent 45%),
+    var(--navy-deep);
+  padding: 40px 20px 80px;
+}
+
+/* ---------- Login screen ---------- */
+#login{
+  max-width: 360px;
+  margin: 12vh auto 0;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 32px 28px;
+  text-align:center;
+  box-shadow: 0 25px 50px -20px rgba(0,0,0,.6);
+}
+
+#login::before{
+  content: "🎟";
+  font-size: 34px;
+  display:block;
+  margin-bottom: 6px;
+}
+
+#login h2{
+  font-family: var(--font-display);
+  margin: 0 0 20px;
+  font-size: 1.3rem;
+  color: var(--gold-bright);
+  letter-spacing: .02em;
+}
+
+#username, #password{
+  width: 100%;
+  padding: 12px 14px;
+  margin: 6px 0;
+  font-family: var(--font-mono);
+  font-size: 15px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--navy-deep);
+  color: var(--cream);
+}
+#username::placeholder, #password::placeholder{ color: #7c82a8; }
+#username:focus-visible, #password:focus-visible{ outline: 2px solid var(--gold); }
+
+/* ---------- Layout ---------- */
+#adminPanel{
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+.admin-header{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap: 16px;
+  border-bottom: 2px solid var(--gold);
+  padding-bottom: 14px;
+  margin-bottom: 30px;
+}
+
+.admin-header h1{
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  margin: 0;
+  color: var(--cream);
+}
+
+.badge{
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--gold-bright);
+  border: 1px solid var(--gold);
+  border-radius: 999px;
+  padding: 4px 10px;
+  white-space: nowrap;
+}
+
+section.panel{
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 22px 24px;
+  margin-bottom: 24px;
+}
+
+section.panel h2{
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  margin: 0 0 16px;
+  color: var(--gold-bright);
+  letter-spacing: .02em;
+}
+
+/* ---------- Form: add prize ---------- */
+.add-form{
+  display:flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.add-form input{
+  flex: 1 1 140px;
+  padding: 11px 13px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--navy-deep);
+  color: var(--cream);
+}
+.add-form input:focus-visible{ outline: 2px solid var(--gold); }
+
+button{
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+}
+
+.btn-gold{
+  padding: 11px 20px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: .04em;
+  color: var(--ink);
+  background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+  box-shadow: 0 3px 0 #96751f;
+  transition: transform .1s ease;
+}
+.btn-gold:hover{ transform: translateY(-1px); }
+.btn-gold:active{ transform: translateY(1px); box-shadow: 0 2px 0 #96751f; }
+.btn-gold:focus-visible{ outline: 2px solid var(--cream); outline-offset: 2px; }
+
+.btn-ghost{
+  padding: 10px 16px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--cream);
+  background: transparent;
+  border: 1px solid var(--border);
+}
+.btn-ghost:hover{ border-color: var(--gold); color: var(--gold-bright); }
+
+/* ---------- Prize cards ---------- */
+#prizes{
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.card{
+  background: var(--navy-deep);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-size: .92rem;
+}
+
+.card b{
+  display:block;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--cream);
+  margin-bottom: 6px;
+}
+
+.card .meta{
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--gold-bright);
+  margin: 2px 0;
+}
+
+.card button{
+  margin-top: 10px;
+  padding: 7px 12px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--lose);
+  background: transparent;
+  border: 1px solid var(--lose);
+}
+.card button:hover{ background: var(--lose); color: var(--cream); }
+
+/* ---------- Table ---------- */
+table{
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  margin-top: 14px;
+}
+
+thead th{
+  text-align: left;
+  padding: 10px 12px;
+  color: var(--gold-bright);
+  border-bottom: 2px solid var(--gold);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  font-size: 11px;
+}
+
+tbody td{
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+tbody tr:hover{ background: rgba(212,165,55,.06); }
+
+tbody button{
+  padding: 6px 10px;
+  font-size: 12px;
+  color: var(--lose);
+  background: transparent;
+  border: 1px solid var(--lose);
+}
+tbody button:hover{ background: var(--lose); color: var(--cream); }
+
+/* ---------- Result feedback ---------- */
+#result{
+  max-width: 880px;
+  margin: 0 auto;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--gold-bright);
+  min-height: 1.2em;
+}
+
+@media (max-width: 600px){
+  .admin-header{ flex-direction:column; align-items:flex-start; }
+}

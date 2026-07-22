@@ -1,71 +1,198 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Space+Mono:wght@400;700&display=swap');
 
-font-family: Arial, sans-serif;
+:root{
+  --velvet: #6B1420;
+  --velvet-deep: #430D16;
+  --velvet-glow: #9A2436;
+  --gold: #D4A537;
+  --gold-bright: #F2C94C;
+  --cream: #F3E9D2;
+  --ink: #2A1712;
+  --win: #2F6F4F;
+  --lose: #A93226;
 
-background:#111;
-
-color:white;
-
-text-align:center;
-
+  --font-display: 'Alfa Slab One', system-ui, sans-serif;
+  --font-body: 'Fraunces', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
 }
 
+*{ box-sizing: border-box; }
 
-.container {
-
-max-width:500px;
-
-margin:100px auto;
-
+body{
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 48px 20px;
+  color: var(--cream);
+  font-family: var(--font-body);
+  background:
+    radial-gradient(circle at 50% -10%, var(--velvet-glow), transparent 55%),
+    repeating-linear-gradient(90deg, var(--velvet) 0px, var(--velvet) 38px, var(--velvet-deep) 38px, var(--velvet-deep) 42px);
 }
 
-
-
-input {
-
-padding:15px;
-
-width:80%;
-
-font-size:18px;
-
-border-radius:10px;
-
-border:none;
-
+.container{
+  max-width: 440px;
+  width:100%;
 }
 
-
-
-button {
-
-margin-top:20px;
-
-padding:15px 30px;
-
-font-size:18px;
-
-border-radius:10px;
-
-cursor:pointer;
-
+/* ---------- Marquee frame ---------- */
+.marquee{
+  position:relative;
+  background: linear-gradient(180deg, #7A1B29, #5C1220);
+  border: 3px solid var(--gold);
+  border-radius: 18px;
+  padding: 40px 28px 32px;
+  text-align:center;
+  box-shadow:
+    0 0 0 6px var(--velvet-deep),
+    0 25px 50px -20px rgba(0,0,0,.7),
+    inset 0 0 40px rgba(0,0,0,.35);
 }
 
+.marquee::before,
+.marquee::after{
+  content:"";
+  position:absolute;
+  left:14px; right:14px;
+  height:10px;
+  background-image: radial-gradient(circle, var(--gold-bright) 42%, transparent 44%);
+  background-size: 22px 10px;
+  background-repeat: repeat-x;
+  animation: blink 1.6s infinite steps(2, jump-none);
+}
+.marquee::before{ top: 10px; }
+.marquee::after{ bottom: 10px; animation-delay:.8s; }
 
+@keyframes blink{ 50%{ opacity:.3; } }
 
-#wheel {
-
-margin:40px auto;
-
-font-size:100px;
-
-transition:1s;
-
+.eyebrow{
+  display:inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--gold-bright);
+  margin: 6px 0 10px;
 }
 
+h1{
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 6vw, 2.8rem);
+  margin: 0 0 6px;
+  color: var(--cream);
+  text-shadow: 0 2px 0 var(--velvet-deep);
+  letter-spacing: .02em;
+}
 
-#result {
+.tagline{
+  margin: 0 0 26px;
+  font-style: italic;
+  font-weight: 500;
+  color: rgba(243,233,210,.85);
+  font-size: 1.02rem;
+}
 
-font-size:30px;
+/* ---------- Form ---------- */
+#email{
+  width:100%;
+  padding: 14px 16px;
+  font-size: 16px;
+  font-family: var(--font-mono);
+  border-radius: 8px;
+  border: 2px solid var(--gold);
+  background: var(--cream);
+  color: var(--ink);
+  outline-offset: 3px;
+}
+#email::placeholder{ color: #8a7a63; }
+#email:focus-visible{ outline: 3px solid var(--gold-bright); }
 
+button{
+  font: inherit;
+  cursor:pointer;
+  border: none;
+  border-radius: 8px;
+}
+
+.btn-play{
+  margin-top: 16px;
+  width: 100%;
+  padding: 15px 20px;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  letter-spacing: .03em;
+  color: var(--ink);
+  background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+  box-shadow: 0 4px 0 #96751f, 0 10px 18px -8px rgba(0,0,0,.6);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.btn-play:hover{ transform: translateY(-1px); }
+.btn-play:active{ transform: translateY(2px); box-shadow: 0 2px 0 #96751f; }
+.btn-play:disabled{ opacity:.6; cursor:not-allowed; transform:none; }
+.btn-play:focus-visible{ outline: 3px solid var(--cream); outline-offset: 3px; }
+
+/* ---------- Prize slot ---------- */
+#wheel{
+  margin: 30px auto 6px;
+  width: 96px;
+  height: 96px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size: 44px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #3a0d15, var(--velvet-deep));
+  border: 3px dashed var(--gold);
+}
+#wheel.spinning{
+  animation: spin .6s linear infinite;
+}
+@keyframes spin{ to{ transform: rotate(360deg); } }
+
+/* ---------- Result ticket ---------- */
+#result-wrap{
+  min-height: 10px;
+  margin-top: 22px;
+}
+
+.ticket{
+  position:relative;
+  background: var(--cream);
+  color: var(--ink);
+  border-radius: 10px;
+  padding: 16px 22px;
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+  text-align:center;
+  animation: ticket-in .35s ease-out;
+}
+.ticket::before,
+.ticket::after{
+  content:"";
+  position:absolute;
+  top:50%;
+  width:20px; height:20px;
+  border-radius:50%;
+  background: var(--velvet);
+  transform: translateY(-50%);
+}
+.ticket::before{ left:-10px; }
+.ticket::after{ right:-10px; }
+
+.ticket.win{ border-top: 4px dashed var(--win); }
+.ticket.lose{ border-top: 4px dashed var(--lose); }
+
+@keyframes ticket-in{
+  from{ opacity:0; transform: translateY(8px); }
+  to{ opacity:1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .marquee::before, .marquee::after, #wheel.spinning, .ticket{ animation:none; }
+}
+
+@media (max-width: 480px){
+  .marquee{ padding: 34px 18px 26px; }
 }
