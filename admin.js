@@ -84,7 +84,6 @@ async function loadParticipants(){
 
     const data = await res.json();
 
-    console.log(data);
 
 }
 
