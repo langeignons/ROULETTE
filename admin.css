@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
 
 :root{
   --navy: #1B1F3B;
@@ -12,7 +12,7 @@
   --lose: #C0392B;
   --border: #3A4066;
 
-  --font-display: 'Alfa Slab One', system-ui, sans-serif;
+  --font-display: 'Anton', Impact, 'Arial Narrow Bold', sans-serif;
   --font-body: 'Inter', system-ui, sans-serif;
   --font-mono: 'Space Mono', 'Courier New', monospace;
 }
@@ -89,7 +89,9 @@ body{
 
 .admin-header h1{
   font-family: var(--font-display);
-  font-size: 1.7rem;
+  font-size: 1.9rem;
+  letter-spacing: .02em;
+  text-transform: uppercase;
   margin: 0;
   color: var(--cream);
 }
@@ -116,10 +118,11 @@ section.panel{
 
 section.panel h2{
   font-family: var(--font-display);
-  font-size: 1.05rem;
+  font-size: 1.15rem;
   margin: 0 0 16px;
   color: var(--gold-bright);
-  letter-spacing: .02em;
+  letter-spacing: .04em;
+  text-transform: uppercase;
 }
 
 /* ---------- Form: add prize ---------- */
