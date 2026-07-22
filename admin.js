@@ -84,21 +84,18 @@ async function loadParticipants(){
 
     const data = await res.json();
 
+    if(!Array.isArray(data)){
+        alert("Session expirée, reconnecte-toi.");
+        return;
+    }
 
-}
+    const table = document.getElementById("participants");
 
+    table.innerHTML="";
 
-
-const table =
-document.getElementById("participants");
-
-
-
-table.innerHTML="";
-
+    data.forEach(p=>{
 
 
-data.forEach(p=>{
 
 
 table.innerHTML += `
@@ -126,7 +123,7 @@ table.innerHTML += `
 
 });
 
-
+}
 
 
 
@@ -244,7 +241,10 @@ async function deletePrize(id){
     await fetch(
         API + "/delete?id=" + id,
         {
-            method:"DELETE"
+            method:"DELETE",
+            headers:{
+                "Authorization":"Bearer "+token
+            }
         }
     );
 
