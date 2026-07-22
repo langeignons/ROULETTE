@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Space+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
 
 :root{
   --velvet: #6B1420;
@@ -12,7 +12,7 @@
   --lose: #A93226;
 
   --font-display: 'Alfa Slab One', system-ui, sans-serif;
-  --font-body: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
   --font-mono: 'Space Mono', 'Courier New', monospace;
 }
 
@@ -88,10 +88,10 @@ h1{
 
 .tagline{
   margin: 0 0 26px;
-  font-style: italic;
-  font-weight: 500;
-  color: rgba(243,233,210,.85);
+  font-weight: 400;
+  color: rgba(243,233,210,.9);
   font-size: 1.02rem;
+  line-height: 1.5;
 }
 
 /* ---------- Form ---------- */
@@ -99,7 +99,7 @@ h1{
   width:100%;
   padding: 14px 16px;
   font-size: 16px;
-  font-family: var(--font-mono);
+  font-family: var(--font-body);
   border-radius: 8px;
   border: 2px solid var(--gold);
   background: var(--cream);
@@ -163,8 +163,9 @@ button{
   color: var(--ink);
   border-radius: 10px;
   padding: 16px 22px;
-  font-family: var(--font-mono);
-  font-size: 1.05rem;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 1.1rem;
   text-align:center;
   animation: ticket-in .35s ease-out;
 }
