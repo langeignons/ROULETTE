@@ -43,11 +43,22 @@ async function play(){
 
     const playBtn = document.getElementById("playBtn");
     const wheel = document.getElementById("wheel");
+    const wheelImg = wheel.querySelector("img");
+    const SPIN_DURATION = 2400; // doit correspondre à la durée dans style.css
 
     playBtn.disabled = true;
+
+    // relance l'animation depuis le début (utile si l'utilisateur rejoue)
+    wheel.classList.remove("spinning");
+    void wheel.offsetWidth; // force le navigateur à "oublier" l'ancienne animation
     wheel.classList.add("spinning");
 
+    const spinDone = new Promise(resolve => {
+        setTimeout(resolve, SPIN_DURATION);
+    });
+
     let data;
+    let networkError = false;
 
     try{
 
@@ -70,15 +81,20 @@ async function play(){
 
     } catch(err){
 
-        wheel.classList.remove("spinning");
-        playBtn.disabled = false;
-        showTicket("❌ Connexion impossible, réessaie.", false);
-        return;
+        networkError = true;
 
     }
 
+    // attend que la roue ait fini de ralentir, même si le serveur a déjà répondu
+    await spinDone;
+
     wheel.classList.remove("spinning");
     playBtn.disabled = false;
+
+    if(networkError){
+        showTicket("❌ Connexion impossible, réessaie.", false);
+        return;
+    }
 
     if(!data.success){
         showTicket("❌ " + data.message, false);

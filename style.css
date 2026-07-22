@@ -136,8 +136,8 @@ button{
 /* ---------- Prize slot ---------- */
 #wheel{
   margin: 30px auto 6px;
-  width: 96px;
-  height: 96px;
+  width: 64px;
+  height: 64px;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -155,9 +155,13 @@ button{
 }
 
 #wheel.spinning img{
-  animation: spin .6s linear infinite;
+  animation: spin-decel 2.4s cubic-bezier(.18,.86,.32,1) 1;
 }
-@keyframes spin{ to{ transform: rotate(360deg); } }
+
+@keyframes spin-decel{
+  to{ transform: rotate(1080deg); } /* 3 tours complets, la courbe cubic-bezier fait le ralenti */
+}
+
 
 /* ---------- Result ticket ---------- */
 #result-wrap{
@@ -199,7 +203,7 @@ button{
 }
 
 @media (prefers-reduced-motion: reduce){
-  .marquee::before, .marquee::after, #wheel.spinning, .ticket{ animation:none; }
+  .marquee::before, .marquee::after, #wheel.spinning img, .ticket{ animation:none; }
 }
 
 @media (max-width: 480px){
